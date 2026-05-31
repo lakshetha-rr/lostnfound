@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matches</title>
+
+    <style>
+        body {
+            background: #0b0b0b;
+            color: white;
+            font-family: Arial;
+            margin: 0;
+        }
+
+        /* NAVBAR */
+        .nav {
+            width: 100%;
+            padding: 18px 40px;
+            border-bottom: 1px solid #1aff66;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #1aff66;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-right a {
+            margin-left: 25px;
+            color: #1aff66;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-right a:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE */
+        .container {
+            padding: 40px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        /* CARD */
+        .card {
+            background: #111;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,255,120,0.15);
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff99;
+            margin-bottom: 12px;
+        }
+
+        .label {
+            margin-top: 6px;
+            color: #ccc;
+        }
+
+        /* BUTTON */
+        .btn {
+            margin-top: 15px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid #1aff66;
+            background: transparent;
+            color: #1aff66;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #1aff66;
+            color: black;
+        }
+
+        /* STATUS */
+        .status {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .pending { color: orange; }
+        .approved { color: #00ff99; }
+        .rejected { color: red; }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="nav">
+    <div class="logo">Lost & Found Portal</div>
+
+    <div class="nav-right">
+        <a href="/home">Home</a>
+        <a href="/lost">Lost</a>
+        <a href="/found">Found</a>
+        <a href="/matches">Matches</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<!-- PAGE -->
+<div class="container">
+    <h1>Possible Matches</h1>
+
+    <div class="grid">
+
+        {% for match in matches %}
+        <div class="card">
+
+            <div class="score">
+                Match Score: {{ match.score }}%
+            </div>
+
+            <div class="label">Category: {{ match.category }}</div>
+            <div class="label">Color: {{ match.color }}</div>
+            <div class="label">Location: {{ match.location }}</div>
+
+            <!-- CLAIM STATUS LOGIC -->
+            {% if match.status == "Approved" %}
+                <div class="status approved">✔ Claim Approved</div>
+
+            {% elif match.status == "Pending" %}
+                <div class="status pending">⏳ Claim Requested</div>
+
+            {% elif match.status == "Rejected" %}
+                <a href="/claim/{{ match.found_id }}">
+                    <button class="btn">Claim Again</button>
+                </a>
+
+            {% else %}
+                <a href="/claim/{{ match.found_id }}">
+                    <button class="btn">Claim Item</button>
+                </a>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+</html>

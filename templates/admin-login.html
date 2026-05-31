@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header style="padding:15px;background:#111;border-bottom:1px solid #39ff14;">
+    <h2 style="color:#39ff14;display:inline;">Admin Panel</h2>
+
+    <nav style="float:right;">
+        <a href="/home" style="margin-right:20px;">Home</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<!-- ADMIN LOGIN FORM -->
+<div style="padding:60px;text-align:center;">
+
+    <h1>Admin Login</h1>
+    <p>Enter admin password to manage claims</p>
+
+    <form method="POST" class="card" style="width:300px;margin:auto;">
+        <input type="password" name="password" placeholder="Admin Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    
+
+</div>
+
+</body>
+</html>

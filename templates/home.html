@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Lost & Found</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header style="padding:15px;background:#111;border-bottom:1px solid #39ff14;">
+    <h2 style="color:#39ff14;display:inline;">Lost & Found Portal</h2>
+
+    <nav style="float:right;">
+        <a href="/lost" style="margin-right:20px;">Report Lost</a>
+        <a href="/found" style="margin-right:20px;">Report Found</a>
+        <a href="/matches" style="margin-right:20px;">Matches</a>
+
+        <a href="/admin-login" style="margin-right:20px;">Admin</a>
+
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<div style="padding:40px;text-align:center;">
+
+    <h1>Welcome to the Lost & Found Dashboard</h1>
+    <p>Choose an action below</p>
+
+    <div style="margin-top:40px;">
+
+        <a href="/lost">
+            <button style="padding:15px 30px;margin:10px;">Report Lost Item</button>
+        </a>
+
+        <a href="/found">
+            <button style="padding:15px 30px;margin:10px;">Report Found Item</button>
+        </a>
+
+        <a href="/admin-login">
+            <button style="padding:15px 30px;margin:10px;">Admin Panel</button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

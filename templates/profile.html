@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">Lost & Found</div>
+
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('lost') }}">Lost</a>
+        <a href="{{ url_for('found') }}">Found</a>
+        <a href="{{ url_for('matches') }}">Matches</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1 class="page-title">My Profile</h1>
+
+    <!-- PROFILE DISPLAY -->
+    <div class="profile-card">
+        <img id="profile-pic"
+             src="{{ url_for('static', filename='images/logo.png') }}"
+             class="profile-avatar">
+
+        <h2 id="display-name">User</h2>
+        <p id="display-email">Email</p>
+        <p id="display-phone">Phone</p>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="profile-actions">
+
+        <button class="btn" onclick="toggleEdit()">Update Profile</button>
+
+        <button class="btn" onclick="location.href='/lost-history'">
+            Lost History
+        </button>
+
+        <button class="btn" onclick="location.href='/found-history'">
+            Found History
+        </button>
+
+        <button class="btn" onclick="location.href='/change-password'">
+            Change Password
+        </button>
+
+        <button class="logout-btn" onclick="location.href='/login'">
+            ⏻
+        </button>
+
+    </div>
+
+    <!-- EDIT PANEL -->
+    <div id="edit-panel" class="form-card" style="display:none;">
+        <h3>Edit Details</h3>
+
+        <input id="profile-name" placeholder="Name">
+        <input id="profile-email" placeholder="Email">
+        <input id="profile-phone" placeholder="Phone">
+        <input id="profile-avatar" placeholder="Avatar URL">
+
+        <button id="save-profile" class="btn">Save Changes</button>
+    </div>
+
+</div>
+
+<footer>© 2026 Lost & Found Portal</footer>
+
+<script>
+function toggleEdit(){
+    const panel = document.getElementById("edit-panel");
+    if(panel.style.display === "none"){
+        panel.style.display = "block";
+    } else {
+        panel.style.display = "none";
+    }
+}
+</script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

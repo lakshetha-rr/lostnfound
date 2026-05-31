@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lost Items</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+body{
+    position: relative;
+}
+
+.top-nav{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    gap: 25px;
+}
+
+.top-nav a{
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.top-nav a:hover{
+    color: white;
+}
+</style>
+
+</head>
+<body>
+
+<div class="top-nav">
+    <a href="/home">Home</a>
+    <a href="/lost">Lost</a>
+    <a href="/found">Found</a>
+    <a href="/matches">Matches</a>
+    <a href="/logout">Logout</a>
+</div>
+
+
+
+<h1>Lost Items</h1>
+
+
+<form method="POST" enctype="multipart/form-data">
+    <input name="name" placeholder="Item Name" required>
+    <input name="category" placeholder="Category" required>
+    <input name="color" placeholder="Color" required>
+    <input name="location" placeholder="Location" required>
+    <input type="file" name="image" required>
+    <button type="submit">Add Lost Item</button>
+</form>
+
+<div class="grid">
+{% for item in items %}
+<div class="card">
+<h2>{{item[1]}}</h2>
+<p>Category: {{item[2]}}</p>
+<p>Color: {{item[3]}}</p>
+<p>Location: {{item[4]}}</p>
+
+<a href="/delete-lost/{{ item[0] }}"
+   onclick="return confirm('Delete this item?')">
+    <button class="delete-btn">Delete</button>
+</a>
+</div>
+
+{% endfor %}
+</div>
+
+</body>
+</html>

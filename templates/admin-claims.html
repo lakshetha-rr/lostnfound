@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - Claims</title>
+
+    <style>
+        body{
+            background:#0b0b0b;
+            color:white;
+            font-family:Segoe UI;
+            margin:0;
+        }
+
+        /* TOP BAR */
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 40px;
+            border-bottom:1px solid #00ff99;
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:600;
+            color:#00ff99;
+        }
+
+        .nav a{
+            color:#00ff99;
+            margin-left:25px;
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .nav a:hover{
+            text-decoration:underline;
+        }
+
+        /* MAIN AREA */
+        .container{
+            width:90%;
+            margin:40px auto;
+        }
+
+        h2{
+            margin-bottom:25px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#111;
+            border-radius:12px;
+            overflow:hidden;
+        }
+
+        th{
+            background:#00ff99;
+            color:black;
+            padding:14px;
+            font-size:14px;
+        }
+
+        td{
+            padding:14px;
+            border-bottom:1px solid #222;
+        }
+
+        tr:hover{
+            background:#161616;
+        }
+
+        /* STATUS COLORS */
+        .pending{
+            color:orange;
+            font-weight:600;
+        }
+
+        .approved{
+            color:#00ff99;
+            font-weight:600;
+        }
+
+        .rejected{
+            color:#ff4d4d;
+            font-weight:600;
+        }
+
+        /* BUTTONS */
+        .btn-view{
+            background:#1e1e1e;
+            color:#00ff99;
+            border:1px solid #00ff99;
+            padding:6px 14px;
+            border-radius:6px;
+            margin-right:6px;
+            cursor:pointer;
+        }
+
+        .btn-approve{
+            background:#00ff99;
+            color:black;
+            border:none;
+            padding:6px 14px;
+            border-radius:6px;
+            margin-right:6px;
+            cursor:pointer;
+        }
+
+        .btn-reject{
+            background:#ff4444;
+            color:white;
+            border:none;
+            padding:6px 14px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP NAV -->
+    <div class="topbar">
+        <div class="logo">Admin Panel</div>
+
+        <div class="nav">
+            <a href="/home">Home</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <h2>Claim Requests</h2>
+
+        <table>
+            <tr>
+                <th>Claim ID</th>
+                <th>Item ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Description</th>
+                <th>Proof Image</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for c in claims %}
+            <tr>
+                <td>{{ c[0] }}</td>
+                <td>{{ c[1] }}</td>
+                <td>{{ c[2] }}</td>
+                <td>{{ c[3] }}</td>
+                <td>{{ c[4] }}</td>
+
+                <!-- VIEW PROOF IMAGE -->
+                <td>
+                    <a href="/static/uploads/{{ c[5] }}" target="_blank">
+                        <button class="btn-view">View</button>
+                    </a>
+                </td>
+
+                <!-- STATUS -->
+                <td>
+                    {% if c[6] == "Pending" %}
+                        <span class="pending">Pending</span>
+                    {% elif c[6] == "Approved" %}
+                        <span class="approved">Approved</span>
+                    {% else %}
+                        <span class="rejected">Rejected</span>
+                    {% endif %}
+                </td>
+
+                <!-- ACTION BUTTONS -->
+                <td>
+                    {% if c[6] == "Pending" %}
+                        <a href="/approve/{{ c[0] }}">
+                            <button class="btn-approve">Approve</button>
+                        </a>
+
+                        <a href="/reject/{{ c[0] }}">
+                            <button class="btn-reject">Reject</button>
+                        </a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
